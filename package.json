@@ -1,0 +1,7 @@
+{
+    "name": "aldwino-web",
+    "private": true,
+    "workspaces": [
+        "apps/*"
+    ]
+}
