@@ -3,5 +3,8 @@
     "private": true,
     "workspaces": [
         "apps/*"
-    ]
+    ],
+    "engines": {
+        "node": ">=20 <21"
+    }
 }
