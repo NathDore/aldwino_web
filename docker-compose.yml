@@ -1,0 +1,37 @@
+services:
+  ai:
+    build:
+      context: ./apps/ai
+      dockerfile: Dockerfile
+      target: dev
+    env_file: apps/ai/.env
+    volumes:
+      - ./apps/ai:/app
+      - /app/.venv
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+      target: dev
+    env_file: apps/api/.env
+    ports:
+      - "4287:4287"
+    depends_on:
+      - ai
+    volumes:
+      - ./apps/api:/app/apps/api
+      - /app/apps/api/node_modules
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      target: dev
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api
+    volumes:
+      - ./apps/web:/app/apps/web
+      - /app/apps/web/node_modules
